@@ -1,33 +1,194 @@
-# SwiftLabs SaaS Starter
+# Screenshot API
 
-Template for building new SwiftLabs products. Clone this, replace the placeholders, ship.
+A professional website screenshot API service built with Next.js, Puppeteer, and Supabase.
 
-## Quick Start
+## Features
 
-1. Copy this template: `cp -r templates/saas-starter products/your-product`
-2. `cd products/your-product && npm install`
-3. Copy `.env.example` to `.env.local` and fill in your keys
-4. Create a Supabase project and run `supabase/migration.sql`
-5. Replace all `ProductName` / `TEMPLATE` markers with your product details
-6. `npm run dev`
+- 📸 **Multiple Formats** — PNG, JPEG, PDF
+- ⚡ **Lightning Fast** — Puppeteer-powered rendering engine
+- 🔐 **Secure Authentication** — API key-based authentication
+- 📊 **Usage Analytics** — Track every request with detailed metrics
+- 💳 **Usage-Based Pricing** — Free tier + paid plans with overage billing
+- 🎨 **Customisable** — Custom viewport sizes, quality control, delays
+- 🚀 **Production Ready** — Rate limiting, quota enforcement, error handling
 
-## What's Included
+## Tech Stack
 
-- **Landing page** — Hero, features, pricing, FAQ
-- **Auth** — Sign up, log in, forgot/reset password (Supabase)
-- **Dashboard shell** — Protected route with user info
-- **Stripe** — Checkout, customer portal, webhook handler
-- **Middleware** — Route protection (dashboard requires auth)
-- **SEO** — Sitemap, robots.txt, meta tags
-- **Dark theme** — Zinc colour scale, Inter font
+- **Framework:** Next.js 16 (App Router)
+- **Screenshot Engine:** Puppeteer
+- **Database:** Supabase (PostgreSQL)
+- **Authentication:** Supabase Auth
+- **Payments:** Stripe
+- **Hosting:** Vercel
+- **Language:** TypeScript (strict mode)
 
-## Customisation Checklist
+## Pricing Tiers
 
-- [ ] Update `layout.tsx` metadata (title, description)
-- [ ] Update `page.tsx` (hero, features, pricing, FAQ)
-- [ ] Update brand colour in `globals.css` (`--color-brand`)
-- [ ] Replace "ProductName" in nav/footer
-- [ ] Add product-specific tables to `supabase/migration.sql`
-- [ ] Create Stripe price ID and wire up checkout
-- [ ] Set env vars in Vercel
-- [ ] Add Terms and Privacy pages
+| Tier | Price | Screenshots/Month | Overage Rate |
+|------|-------|------------------|--------------|
+| Free | £0 | 100 | — |
+| Starter | £10 | 20,000 | £0.001 |
+| Pro | £25 | 100,000 | £0.0005 |
+
+## API Usage
+
+### Authentication
+
+All API requests require an API key sent via the `Authorization` header:
+
+```bash
+curl -X POST https://screenshotapi.example.com/api/screenshot \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://example.com",
+    "format": "png"
+  }'
+```
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `url` | string | required | Website URL to capture |
+| `format` | string | `png` | Output format (`png`, `jpeg`, `pdf`) |
+| `width` | number | `1920` | Viewport width (320-3840) |
+| `height` | number | `1080` | Viewport height (320-3840) |
+| `fullPage` | boolean | `false` | Capture full scrollable page |
+| `quality` | number | `80` | JPEG quality (1-100) |
+| `delay` | number | `0` | Delay before capture (ms, max 5000) |
+
+### Response
+
+- **Success (200):** Binary image/PDF data
+- **Bad Request (400):** Invalid parameters
+- **Unauthorized (401):** Invalid or missing API key
+- **Payment Required (402):** Quota exceeded
+- **Too Many Requests (429):** Rate limit exceeded
+
+## Local Development
+
+### Prerequisites
+
+- Node.js 18+
+- npm or pnpm
+- Supabase account
+- Stripe account (for payments)
+
+### Setup
+
+1. **Clone and install:**
+
+```bash
+cd screenshotapi
+npm install
+```
+
+2. **Configure environment variables:**
+
+Create `.env.local`:
+
+```bash
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# Stripe
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL=your_customer_portal_url
+
+# Site
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+3. **Run database migrations:**
+
+```bash
+# In Supabase SQL Editor, run:
+# supabase/migrations/003_screenshot_api.sql
+```
+
+4. **Start development server:**
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000`
+
+## Project Structure
+
+```
+screenshotapi/
+├── app/
+│   ├── api/
+│   │   ├── og/              # OG image generation
+│   │   ├── screenshot/      # Main screenshot endpoint
+│   │   └── usage/           # Quota check endpoint
+│   ├── auth/
+│   │   ├── callback/        # OAuth callback
+│   │   ├── login/           # Login page
+│   │   ├── logout/          # Logout action
+│   │   └── signup/          # Registration page
+│   ├── dashboard/
+│   │   ├── api-keys/        # API key management
+│   │   ├── settings/        # Account settings
+│   │   └── page.tsx         # Dashboard overview
+│   ├── docs/                # API documentation
+│   ├── pricing/             # Pricing page
+│   ├── privacy/             # Privacy policy
+│   ├── terms/               # Terms of service
+│   └── page.tsx             # Landing page
+├── lib/
+│   ├── api-keys/            # API key hashing and validation
+│   ├── screenshot/          # Puppeteer screenshot service
+│   └── supabase/            # Supabase client utilities
+├── supabase/
+│   └── migrations/          # Database schema
+└── public/                  # Static assets
+```
+
+## Database Schema
+
+### Tables
+
+- **`api_keys`** — API key storage (hashed)
+- **`screenshot_usage`** — Request logs and metrics
+- **`subscriptions`** — User subscription details
+
+### Row-Level Security (RLS)
+
+All tables have RLS enabled. Users can only access their own data.
+
+## Rate Limiting
+
+- **60 requests/minute** per API key
+- In-memory rate limiting (single-instance)
+- Upgrade path to Redis (Upstash) for multi-instance scaling
+
+## Deployment
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
+
+## Security
+
+- API keys are cryptographically hashed (SHA-256)
+- Passwords hashed with bcrypt
+- HTTPS/TLS encryption enforced
+- Row-level security (RLS) on all database tables
+- Rate limiting to prevent abuse
+- CORS headers configured
+- Environment variables for secrets
+
+## Support
+
+- **Email:** hello@swiftlabs.dev
+- **Documentation:** `/docs`
+- **Dashboard:** `/dashboard`
+
+## License
+
+Proprietary — SwiftLabs 2026
