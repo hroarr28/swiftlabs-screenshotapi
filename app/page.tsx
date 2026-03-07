@@ -41,12 +41,12 @@ export default function HomePage() {
       <section className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl font-bold mb-6">
-            Website Screenshot API <br />
-            <span className="text-blue-600">Simple. Fast. Reliable.</span>
+            The Fastest Screenshot API <br />
+            <span className="text-blue-600">For Developers Who Ship Fast</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Capture perfect screenshots of any webpage with a single HTTP request. 
-            PNG, JPEG, or PDF. Custom viewport sizes. Full-page screenshots.
+            One API call, instant screenshots. PNG, JPEG, or PDF. Full-page or viewport. 
+            No rate limits that slow you down. 100 free screenshots every month.
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link
@@ -63,7 +63,7 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="text-sm text-gray-500 mt-4">
-            100 screenshots free every month. No credit card required.
+            100 screenshots/month free forever • No credit card • 60s integration
           </p>
         </div>
       </section>
@@ -114,9 +114,9 @@ export default function HomePage() {
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
               <Zap className="w-6 h-6 text-blue-600" />
             </div>
-            <h3 className="font-semibold mb-2">Lightning Fast</h3>
+            <h3 className="font-semibold mb-2">Under 3s Response Time</h3>
             <p className="text-sm text-gray-600">
-              Average response time under 3 seconds. Optimized infrastructure.
+              Average screenshot delivered in 2.4 seconds. Puppeteer-powered, Vercel Edge-deployed.
             </p>
           </div>
 
@@ -124,9 +124,9 @@ export default function HomePage() {
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
               <Shield className="w-6 h-6 text-blue-600" />
             </div>
-            <h3 className="font-semibold mb-2">Secure & Private</h3>
+            <h3 className="font-semibold mb-2">Zero Data Retention</h3>
             <p className="text-sm text-gray-600">
-              Your screenshots are never stored. Deleted immediately after delivery.
+              Screenshots generated and served in memory. Never written to disk. GDPR-compliant by design.
             </p>
           </div>
 
@@ -146,48 +146,48 @@ export default function HomePage() {
       <section className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Built for developers
+            Production-ready use cases
           </h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-white p-6 rounded-lg border">
-              <h3 className="font-semibold mb-2">Website Monitoring</h3>
+              <h3 className="font-semibold mb-2">Visual Monitoring</h3>
               <p className="text-sm text-gray-600">
-                Capture visual snapshots of your sites for monitoring and archiving.
+                Capture screenshots every 5 minutes. Detect layout breaks before your users do.
               </p>
             </div>
 
             <div className="bg-white p-6 rounded-lg border">
-              <h3 className="font-semibold mb-2">Social Media</h3>
+              <h3 className="font-semibold mb-2">OG Images on Demand</h3>
               <p className="text-sm text-gray-600">
-                Generate preview images for link sharing on Twitter, Facebook, LinkedIn.
+                Generate social preview images dynamically. No manual exports, no stale images.
               </p>
             </div>
 
             <div className="bg-white p-6 rounded-lg border">
-              <h3 className="font-semibold mb-2">Testing & QA</h3>
+              <h3 className="font-semibold mb-2">Visual Regression Testing</h3>
               <p className="text-sm text-gray-600">
-                Automated visual regression testing across different viewports.
+                Compare screenshots pre/post-deploy. Catch CSS bugs in CI/CD pipelines.
               </p>
             </div>
 
             <div className="bg-white p-6 rounded-lg border">
-              <h3 className="font-semibold mb-2">Documentation</h3>
+              <h3 className="font-semibold mb-2">Auto-Generated Docs</h3>
               <p className="text-sm text-gray-600">
-                Generate screenshots for user guides, tutorials, and help docs.
+                Embed live screenshots in docs. Always up-to-date, zero manual maintenance.
               </p>
             </div>
 
             <div className="bg-white p-6 rounded-lg border">
-              <h3 className="font-semibold mb-2">Reports & PDFs</h3>
+              <h3 className="font-semibold mb-2">PDF Reports</h3>
               <p className="text-sm text-gray-600">
-                Embed webpage screenshots in automated reports and PDF exports.
+                Render entire webpages as PDFs. Client reports, invoices, analytics dashboards.
               </p>
             </div>
 
             <div className="bg-white p-6 rounded-lg border">
-              <h3 className="font-semibold mb-2">Lead Generation</h3>
+              <h3 className="font-semibold mb-2">Portfolio Previews</h3>
               <p className="text-sm text-gray-600">
-                Show previews of customer websites in your SaaS product.
+                Show client website thumbnails automatically. Update in real-time, no CMS required.
               </p>
             </div>
           </div>
@@ -198,16 +198,16 @@ export default function HomePage() {
       <section className="container mx-auto px-4 py-20">
         <div className="max-w-3xl mx-auto text-center bg-blue-600 rounded-2xl p-12 text-white">
           <h2 className="text-3xl font-bold mb-4">
-            Ready to start capturing screenshots?
+            Ship your first screenshot in 60 seconds
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Get 100 screenshots free every month. No credit card required.
+            100 screenshots/month free forever • No credit card • Cancel anytime
           </p>
           <Link
             href="/auth/signup"
             className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100"
           >
-            Start Free Trial
+            Get Your API Key
           </Link>
         </div>
       </section>
